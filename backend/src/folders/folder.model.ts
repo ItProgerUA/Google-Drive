@@ -16,7 +16,15 @@ export interface FolderCreationAttrs {
   parentId?: string;
 }
 
-@Table({ tableName: "folders" })
+@Table({
+  tableName: "folders",
+  indexes: [
+    { fields: ["userId"] },
+    { fields: ["parentId"] },
+    { fields: ["userId", "parentId"] },
+    { fields: ["name"] },
+  ],
+})
 export class Folder extends Model<Folder, FolderCreationAttrs> {
   @ApiProperty({ example: "1", description: "Unique identifier" })
   @Column({

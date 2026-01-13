@@ -19,7 +19,16 @@ export interface FileCreationAttrs {
   userId: string;
 }
 
-@Table({ tableName: "files" })
+@Table({
+  tableName: "files",
+  indexes: [
+    { fields: ["userId"] },
+    { fields: ["folderId"] },
+    { fields: ["userId", "folderId"] },
+    { fields: ["name"] },
+    { fields: ["mimetype"] },
+  ],
+})
 export class File extends Model<File, FileCreationAttrs> {
   @ApiProperty({ example: "uuid", description: "Unique identifier" })
   @Column({
